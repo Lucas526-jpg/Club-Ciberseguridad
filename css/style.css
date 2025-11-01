@@ -1,0 +1,70 @@
+/*
+    ================================================
+    Tema Hacker / Terminal (Dark Mode)
+    ================================================
+*/
+
+/* Variables para el tema */
+:root {
+    --color-negro: #000000;
+    --color-verde-hacker: #00ff41; /* Verde neón brillante */
+    --color-verde-claro: #004d1a;
+    --color-rojo-claro: #4d0000;
+    --color-amarillo-claro: #4d4d00;
+}
+
+/* Estilo principal del cuerpo: Fondo negro y texto verde */
+body {
+    background-color: var(--color-negro) !important;
+    color: var(--color-verde-hacker) !important;
+    font-family: 'Consolas', 'Courier New', monospace; /* Fuente de terminal */
+}
+
+/* Títulos y Enlaces: Se fuerza el color verde neón */
+h1, h2, h3, h4, .lead, a, .nav-link {
+    color: var(--color-verde-hacker) !important;
+}
+
+/* Estilo para el logo en el header */
+.logo {
+    max-width: 80px;
+    height: auto;
+    /* Da un efecto de scanline o terminal al logo */
+    box-shadow: 0 0 10px var(--color-verde-hacker);
+}
+
+/* Ajuste de color de fondo para secciones (Bootstrap bg-dark es gris oscuro, lo forzamos a negro) */
+.bg-dark, .bg-black {
+    background-color: var(--color-negro) !important;
+}
+
+/* Clases para simular el estado de resolución del Juez Virtual */
+
+/* Simula Accepted/AC */
+.status-ok {
+    background-color: var(--color-verde-claro) !important;
+    color: var(--color-verde-hacker) !important;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--color-verde-hacker); /* Efecto neón */
+}
+
+/* Simula Wrong Answer/WA o No Resuelto */
+.status-fail {
+    background-color: var(--color-rojo-claro) !important;
+    color: red !important;
+    font-weight: bold;
+    text-shadow: 0 0 5px red;
+}
+
+/* Simula Pending/En Curso/Trying */
+.status-pending {
+    background-color: var(--color-amarillo-claro) !important;
+    color: yellow !important;
+    font-weight: bold;
+    text-shadow: 0 0 5px yellow;
+}
+
+/* Ajustes de tabla para consistencia del tema */
+#ctf-list th, #ctf-list td {
+    border-color: #333 !important; /* Bordes más sutiles */
+}
