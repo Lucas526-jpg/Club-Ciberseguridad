@@ -1,76 +1,197 @@
-/*
-    ================================================
-    Tema Hacker / Terminal (Dark Mode)
-    ================================================
-*/
-
-/* Variables para el tema */
+/* 1. Definición de Variables de Color */
 :root {
     --color-negro: #000000;
-    --color-verde-hacker: #00ff41; /* Verde neón brillante */
-    --color-verde-claro: #004d1a;
-    --color-rojo-claro: #4d0000;
-    --color-amarillo-claro: #4d4d00;
+    --color-verde-hacker: #00ff41;  /* Verde Neón Principal */
+    --color-verde-claro: #004d1a;   /* Verde Oscuro (Fondo de Estados y Bordes sutiles) */
+    --color-rojo-claro: #4d0000;    /* Rojo Oscuro (Fondo de Estados) */
+    --color-amarillo-claro: #4d4d00; /* Amarillo Oscuro (Fondo de Estados) */
 }
 
-/* Estilo principal del cuerpo: Fondo negro y texto verde */
+/* 2. Estilos Base y Tipografía */
 body {
     background-color: var(--color-negro) !important;
     color: var(--color-verde-hacker) !important;
-    font-family: 'Consolas', 'Courier New', monospace; /* Fuente de terminal */
+    font-family: 'Consolas', 'Courier New', monospace;
 }
 
-/* Títulos y Enlaces: Se fuerza el color verde neón */
 h1, h2, h3, h4, .lead, a, .nav-link {
     color: var(--color-verde-hacker) !important;
 }
 
-/* Estilo para el logo en el header */
-.logo {
-    max-width: 80px;
-    height: auto;
-    /* Da un efecto de scanline o terminal al logo */
-    box-shadow: 0 0 10px var(--color-verde-hacker);
-}
-
-/* Ajuste de color de fondo para secciones (Bootstrap bg-dark es gris oscuro, lo forzamos a negro) */
-.bg-dark, .bg-black {
+/* Sobrescritura de fondos de Bootstrap para forzar el Negro Absoluto */
+.bg-dark, .bg-secondary, .bg-black {
     background-color: var(--color-negro) !important;
 }
 
-/* Clases para simular el estado de resolución del Juez Virtual */
+/* Estilo del Logo en el Encabezado */
+.logo {
+    max-width: 80px;
+    height: auto;
+    box-shadow: 0 0 10px var(--color-verde-hacker);
+}
 
-/* Simula Accepted/AC */
+
+/* 3. NAVEGACIÓN Y COMPONENTES DE INTERACCIÓN */
+
+/* Ícono de menú hamburguesa (Color Verde Neón) */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 255, 65, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3cpath stroke='rgba(0, 255, 65, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Estilo de los Enlaces del Menú (Reservando espacio para el borde en hover) */
+.navbar-nav .nav-link {
+    border: 2px solid transparent !important; 
+    transition: all 0.3s ease;
+}
+
+/* Efecto Hover y Focus en Enlaces de Navegación */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    border-color: var(--color-verde-hacker) !important; 
+    box-shadow: 0 0 10px var(--color-verde-hacker) !important;
+    background-color: transparent !important; 
+}
+
+
+/* 4. ESTILOS DE CARDS Y BOTONES CTF */
+
+/* Estilo Base de las Tarjetas (CTF) */
+#ctf-simulacion .card {
+    background-color: var(--color-negro) !important;
+    border: 1px solid var(--color-verde-hacker) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+/* Efecto Hover en Tarjetas */
+#ctf-simulacion .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--color-verde-hacker), 0 0 5px var(--color-verde-hacker);
+    border-color: var(--color-verde-hacker) !important;
+}
+
+/* Estilo del Botón de Acceso (Acceder) */
+.btn.bg-secondary {
+    color: var(--color-verde-hacker) !important; 
+    background-color: #1a1a1a !important; 
+    border: 1px solid var(--color-verde-hacker) !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto Hover del Botón de Acceso */
+.btn.bg-secondary:hover {
+    background-color: var(--color-verde-claro) !important; 
+    box-shadow: 0 0 10px var(--color-verde-hacker);
+}
+
+/* 5. ESTADOS DE RESOLUCIÓN (Clases Globales) */
+
+/* Estilos comunes para todas las celdas de estado */
+.status-ok, .status-fail, .status-pending {
+    font-weight: bold;
+}
+
+/* Estado RESUELTO (status-ok) */
 .status-ok {
     background-color: var(--color-verde-claro) !important;
     color: var(--color-verde-hacker) !important;
-    font-weight: bold;
-    text-shadow: 0 0 5px var(--color-verde-hacker); /* Efecto neón */
+    text-shadow: 0 0 5px var(--color-verde-hacker);
 }
 
-/* Simula Wrong Answer/WA o No Resuelto */
+/* Estado PENDIENTE (status-fail) */
 .status-fail {
     background-color: var(--color-rojo-claro) !important;
     color: red !important;
-    font-weight: bold;
     text-shadow: 0 0 5px red;
 }
 
-/* Simula Pending/En Curso/Trying */
+/* Estado EN CURSO (status-pending) */
 .status-pending {
     background-color: var(--color-amarillo-claro) !important;
     color: yellow !important;
-    font-weight: bold;
     text-shadow: 0 0 5px yellow;
 }
 
-/* Ajustes de tabla para consistencia del tema */
+/* Ajuste de borde sutil para tablas fuera del Offcanvas */
 #ctf-list th, #ctf-list td {
-    border-color: #333 !important; /* Bordes más sutiles */
+    border-color: #333 !important; 
 }
 
-/* Ajuste para el botón de hamburguesa (navbar-toggler) */
-.navbar-toggler-icon {
-    /* Color verde neón para las tres líneas de la hamburguesa */
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 255, 65, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+
+/* 6. ESTILOS ESPECÍFICOS PARA OFFCANVAS */
+
+/* Contenedor principal del Offcanvas */
+.offcanvas {
+    background-color: var(--color-negro) !important;
+    color: var(--color-verde-hacker) !important;
+    border-right: 2px solid var(--color-verde-hacker); 
+    transition: none !important; 
+    transform: none !important;
+}
+
+/* Botón de cierre ('X') */
+.offcanvas-header .btn-close {
+    filter: invert(1) hue-rotate(100deg) brightness(1.5);
+    opacity: 1;
+    background-color: transparent !important; 
+    border: 1px solid var(--color-verde-hacker) !important;
+    padding: 0.5rem;
+}
+
+
+/* 7. TABLA DENTRO DEL OFFCANVAS (Ajuste de Bordes y Colores) */
+
+/* 7.1. Estilo Principal de la Tabla del Offcanvas (Marco Exterior) */
+.offcanvas-body .table.table-dark {
+    border: 1px solid var(--color-verde-hacker) !important; 
+    color: var(--color-verde-hacker) !important;
+    background-color: transparent !important; 
+}
+
+/* 7.2. Encabezados de Columna (TH) */
+.offcanvas-body .table th, 
+.offcanvas-body .table thead,
+.offcanvas-body .table thead tr {
+    background-color: transparent !important; 
+    color: var(--color-verde-hacker) !important;
+}
+.offcanvas-body .table th {
+    text-shadow: 0 0 5px var(--color-verde-hacker); 
+    border-bottom: 2px solid var(--color-verde-hacker) !important; 
+    border-top: none !important; 
+    border-left: 1px solid var(--color-verde-claro) !important; 
+    border-right: 1px solid var(--color-verde-claro) !important; 
+}
+
+/* 7.3. Celdas de Datos (TD) - Estilo base de Terminal */
+.offcanvas-body .table td {
+    background-color: transparent !important; 
+    border-top: 1px solid var(--color-verde-claro) !important;
+    border-bottom: none !important;
+    border-left: 1px solid var(--color-verde-claro) !important;
+    border-right: 1px solid var(--color-verde-claro) !important;
+    color: var(--color-verde-hacker) !important;
+}
+
+/* 7.4. Sobreescritura de Estados de Resolución en el Offcanvas (Prioridad) */
+.offcanvas-body .table td.status-ok {
+    background-color: var(--color-verde-claro) !important;
+    color: var(--color-verde-hacker) !important;
+    text-shadow: 0 0 5px var(--color-verde-hacker); 
+}
+.offcanvas-body .table td.status-fail {
+    background-color: var(--color-rojo-claro) !important;
+    color: red !important;
+    text-shadow: 0 0 5px red;
+}
+.offcanvas-body .table td.status-pending {
+    background-color: var(--color-amarillo-claro) !important;
+    color: yellow !important;
+    text-shadow: 0 0 5px yellow;
+}
+
+/* 7.5. Compatibilidad de Bordes de Bootstrap (Limpieza) */
+.offcanvas-body .table-bordered > :not(caption) > *,
+.offcanvas-body .table-dark > :not(caption) > * > * {
+    border-color: var(--color-verde-claro) !important;
 }
