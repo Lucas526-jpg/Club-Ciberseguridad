@@ -1,50 +1,96 @@
-/* 1. Definición de Variables de Color */
-:root {
-    --color-negro: #000000;
-    --color-verde-hacker: #00ff41;  /* Verde Neón Principal */
-    --color-verde-claro: #004d1a;   /* Verde Oscuro (Fondo de Estados y Bordes sutiles) */
-    --color-rojo-claro: #4d0000;    /* Rojo Oscuro (Fondo de Estados) */
-    --color-amarillo-claro: #4d4d00; /* Amarillo Oscuro (Fondo de Estados) */
+/* ------------------------------------------- */
+/* 1. RESET, VARIABLES Y ESTILOS BASE */
+/* ------------------------------------------- */
+/* Usamos box-sizing para evitar problemas de desbordamiento */
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box; 
 }
 
-/* 2. Estilos Base y Tipografía */
+/* 1. Definicion de Variables de Color */
+:root {
+    --color-negro: #000000;
+    --color-verde-hacker: #00ff41;  
+    --color-verde-claro: #004d1a;   
+    --color-rojo-claro: #4d0000;    
+    --color-amarillo-claro: #4d4d00;
+    --color-borde-principal: #00CC33; 
+}
+
+/* 2. Estilos Base y Tipografia */
+html, body {
+    height: 100%;       
+    min-height: 100vh;  
+    overflow-x: hidden; 
+}
+
 body {
     background-color: var(--color-negro) !important;
     color: var(--color-verde-hacker) !important;
     font-family: 'Consolas', 'Courier New', monospace;
+    margin: 0;
+    padding: 0;
 }
 
-h1, h2, h3, h4, .lead, a, .nav-link {
+/* ------------------------------------------- */
+/* 3. ESTILOS DE FONDO DE MATRIX */
+/* ------------------------------------------- */
+#animated-background {
+    position: fixed; /* Cambiado a fixed para asegurar que cubra toda la ventana */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    z-index: -2; 
+    overflow: hidden; 
+}
+
+#matrix-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-negro); 
+}
+
+/* ------------------------------------------- */
+/* 4. ESTILOS DE CONTENIDO Y COMPONENTES */
+/* ------------------------------------------- */
+header, nav, main, footer{
+    position: relative; 
+    z-index: 1; /* El contenido siempre encima del fondo */
+}
+
+/* Efecto de superposicion para bloques de contenido */
+.hacker-bg-overlay{
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Color principal del texto */
+h1, h2, h3, h4, .lead, a, .nav-link, .card-body p {
     color: var(--color-verde-hacker) !important;
 }
 
-/* Sobrescritura de fondos de Bootstrap para forzar el Negro Absoluto */
-.bg-dark, .bg-secondary, .bg-black {
-    background-color: var(--color-negro) !important;
-}
-
-/* Estilo del Logo en el Encabezado */
+/* Logo */
 .logo {
     max-width: 80px;
     height: auto;
     box-shadow: 0 0 10px var(--color-verde-hacker);
+    object-fit: cover;
 }
 
-
-/* 3. NAVEGACIÓN Y COMPONENTES DE INTERACCIÓN */
-
-/* Ícono de menú hamburguesa (Color Verde Neón) */
+/* NAVEGACION (Navbar) */
+/* Icono de menu hamburguesa */
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 255, 65, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3cpath stroke='rgba(0, 255, 65, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
-/* Estilo de los Enlaces del Menú (Reservando espacio para el borde en hover) */
 .navbar-nav .nav-link {
     border: 2px solid transparent !important; 
     transition: all 0.3s ease;
 }
 
-/* Efecto Hover y Focus en Enlaces de Navegación */
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus {
     border-color: var(--color-verde-hacker) !important; 
@@ -52,25 +98,27 @@ h1, h2, h3, h4, .lead, a, .nav-link {
     background-color: transparent !important; 
 }
 
-
-/* 4. ESTILOS DE CARDS Y BOTONES CTF */
-
-/* Estilo Base de las Tarjetas (CTF) */
+/* CARDS CTF */
 #ctf-simulacion .card {
     background-color: var(--color-negro) !important;
     border: 1px solid var(--color-verde-hacker) !important;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
+    width: 15em;
 }
 
-/* Efecto Hover en Tarjetas */
+.imagen-card {
+    height: 50%;
+    overflow: hidden;
+}
+
 #ctf-simulacion .card:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px var(--color-verde-hacker), 0 0 5px var(--color-verde-hacker);
     border-color: var(--color-verde-hacker) !important;
 }
 
-/* Estilo del Botón de Acceso (Acceder) */
+/* BOTONES */
 .btn.bg-secondary {
     color: var(--color-verde-hacker) !important; 
     background-color: #1a1a1a !important; 
@@ -78,58 +126,42 @@ h1, h2, h3, h4, .lead, a, .nav-link {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto Hover del Botón de Acceso */
 .btn.bg-secondary:hover {
     background-color: var(--color-verde-claro) !important; 
     box-shadow: 0 0 10px var(--color-verde-hacker);
 }
 
-/* 5. ESTADOS DE RESOLUCIÓN (Clases Globales) */
-
-/* Estilos comunes para todas las celdas de estado */
+/* ESTADOS DE RESOLUCION (Tablas) */
 .status-ok, .status-fail, .status-pending {
     font-weight: bold;
+    text-align: center;
 }
 
-/* Estado RESUELTO (status-ok) */
 .status-ok {
     background-color: var(--color-verde-claro) !important;
     color: var(--color-verde-hacker) !important;
     text-shadow: 0 0 5px var(--color-verde-hacker);
 }
 
-/* Estado PENDIENTE (status-fail) */
 .status-fail {
     background-color: var(--color-rojo-claro) !important;
     color: red !important;
     text-shadow: 0 0 5px red;
 }
 
-/* Estado EN CURSO (status-pending) */
 .status-pending {
     background-color: var(--color-amarillo-claro) !important;
     color: yellow !important;
     text-shadow: 0 0 5px yellow;
 }
 
-/* Ajuste de borde sutil para tablas fuera del Offcanvas */
-#ctf-list th, #ctf-list td {
-    border-color: #333 !important; 
-}
-
-
-/* 6. ESTILOS ESPECÍFICOS PARA OFFCANVAS */
-
-/* Contenedor principal del Offcanvas */
+/* OFFCANVAS */
 .offcanvas {
     background-color: var(--color-negro) !important;
     color: var(--color-verde-hacker) !important;
     border-right: 2px solid var(--color-verde-hacker); 
-    transition: none !important; 
-    transform: none !important;
 }
 
-/* Botón de cierre ('X') */
 .offcanvas-header .btn-close {
     filter: invert(1) hue-rotate(100deg) brightness(1.5);
     opacity: 1;
@@ -138,60 +170,94 @@ h1, h2, h3, h4, .lead, a, .nav-link {
     padding: 0.5rem;
 }
 
-
-/* 7. TABLA DENTRO DEL OFFCANVAS (Ajuste de Bordes y Colores) */
-
-/* 7.1. Estilo Principal de la Tabla del Offcanvas (Marco Exterior) */
+/* TABLA DENTRO DEL OFFCANVAS (Estilos de terminal) */
 .offcanvas-body .table.table-dark {
     border: 1px solid var(--color-verde-hacker) !important; 
     color: var(--color-verde-hacker) !important;
     background-color: transparent !important; 
 }
 
-/* 7.2. Encabezados de Columna (TH) */
 .offcanvas-body .table th, 
 .offcanvas-body .table thead,
 .offcanvas-body .table thead tr {
     background-color: transparent !important; 
     color: var(--color-verde-hacker) !important;
-}
-.offcanvas-body .table th {
     text-shadow: 0 0 5px var(--color-verde-hacker); 
     border-bottom: 2px solid var(--color-verde-hacker) !important; 
-    border-top: none !important; 
-    border-left: 1px solid var(--color-verde-claro) !important; 
-    border-right: 1px solid var(--color-verde-claro) !important; 
 }
 
-/* 7.3. Celdas de Datos (TD) - Estilo base de Terminal */
 .offcanvas-body .table td {
     background-color: transparent !important; 
     border-top: 1px solid var(--color-verde-claro) !important;
-    border-bottom: none !important;
-    border-left: 1px solid var(--color-verde-claro) !important;
-    border-right: 1px solid var(--color-verde-claro) !important;
     color: var(--color-verde-hacker) !important;
 }
 
-/* 7.4. Sobreescritura de Estados de Resolución en el Offcanvas (Prioridad) */
+/* Sobreescritura de estados de resolución en Offcanvas */
 .offcanvas-body .table td.status-ok {
     background-color: var(--color-verde-claro) !important;
-    color: var(--color-verde-hacker) !important;
-    text-shadow: 0 0 5px var(--color-verde-hacker); 
 }
 .offcanvas-body .table td.status-fail {
     background-color: var(--color-rojo-claro) !important;
-    color: red !important;
-    text-shadow: 0 0 5px red;
 }
 .offcanvas-body .table td.status-pending {
     background-color: var(--color-amarillo-claro) !important;
-    color: yellow !important;
-    text-shadow: 0 0 5px yellow;
 }
 
-/* 7.5. Compatibilidad de Bordes de Bootstrap (Limpieza) */
-.offcanvas-body .table-bordered > :not(caption) > *,
-.offcanvas-body .table-dark > :not(caption) > * > * {
-    border-color: var(--color-verde-claro) !important;
+/* ------------------------------------------- */
+/* 8. MEDIA QUERIES (RESPONSIVIDAD MOVIL) */
+/* ------------------------------------------- */
+
+/* Estilos para pantallas pequeñas (hasta 768px - Moviles y Tablets pequenas) */
+@media (max-width: 768px) {
+    
+    /* === HEADER - Logo sobre Titulo y Centrado === */
+    header .d-flex {
+        /* Fuerza la pila de los elementos (logo, titulo) */
+        flex-direction: column;
+    }
+
+    header .logo {
+        /* Ajuste del margen para centrar y separar el logo del titulo */
+        margin-right: 0 !important; 
+        margin-bottom: 10px; 
+        margin-left: 0 !important;
+    }
+
+    header h1 {
+        /* Asegura que el titulo este centrado */
+        text-align: center;
+        font-size: 2rem; 
+    }
+    
+    /* === NAVBAR - Menu Centrado === */
+    .navbar-collapse {
+        /* Asegura que el contenido del menu desplegable este centrado */
+        justify-content: center !important; 
+        text-align: center;
+    }
+    
+    .navbar-nav {
+        /* Centra la lista de enlaces */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-item {
+        /* Ancho completo para items y separacion */
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    /* === OFFCANVAS === */
+    .offcanvas-start {
+        width: 90vw !important; /* Aumenta el ancho en moviles */
+    }
+
+    /* === CARDS === */
+    #ctf-simulacion .card {
+        width: 95% !important; /* Permite que las cards se estiren un poco mas */
+    }
 }
