@@ -1,5 +1,20 @@
 // Codigo para generar la animacion de lluvia de Matrix usando un canvas
 
+// Función para corregir el error de 100vh en navegadores moviles (barras de direccion)
+function corregirAlturaVh() {
+    // Calcula el 1% de la altura de la ventana (vh)
+    let vh = window.innerHeight * 0.01;
+    // Establece la variable CSS --vh en el elemento raíz (HTML)
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Ejecutar la correccion al cargar y al redimensionar (ej. al rotar el telefono)
+corregirAlturaVh();
+window.addEventListener('resize', corregirAlturaVh);
+
+// El resto de tu codigo de iniciarAnimacionMatrix() y window.onload debe permanecer igual.
+// Solo asegúrate de que la función corregirAlturaVh() se ejecute ANTES de que la animación se inicie.
+
 const colorPrincipal = '#00E880'; 
 const colorRastro = '#00B369';    
 const listaCaracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}|:<>?-=[]\\;\',./';
